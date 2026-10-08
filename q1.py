@@ -16,7 +16,7 @@ def main():
 
     with open(out_name, "w") as fout:
         for token, freq in counts.items():
-            fout.write(f"{token}    {freq}\n")
+            fout.write(f"{token}\t{freq}\n")
 
 if __name__ == "__main__":
     main()
