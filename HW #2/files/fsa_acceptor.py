@@ -53,8 +53,13 @@ def read_fsa(fsa_fname):
 
 def get_tokens(one_line, alphabet):
     """splits an input line into symbols"""
-    tokens = one_line.split()
-    #if the string is written without spaces (like aabb) split it into chars
+    tokens = []
+    for raw_tok in one_line.split():
+        # input symbols can be in quotation marks like "a", take them off
+        if len(raw_tok) >= 2 and raw_tok[0] == '"' and raw_tok[-1] == '"':
+            raw_tok = raw_tok[1:-1]
+        tokens.append(raw_tok)
+    # if the string is written without spaces (like aabb) split it into chars
     if len(tokens) == 1 and tokens[0] not in alphabet:
         tokens = list(tokens[0])
     return tokens
@@ -94,7 +99,7 @@ def main():
             ans = "yes"
         else:
             ans = "no"
-        f_out.write(one_line + "=> " + ans + "\n")
+        f_out.write(one_line + " => " + ans + "\n")
     f_in.close()
     f_out.close()
 
