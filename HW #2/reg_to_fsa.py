@@ -35,8 +35,10 @@ def main():
             nonterm_set.add(rhs)
 
     final_state = "qf"
+    count = 1
     while final_state in nonterm_set:
-        final_state = final_state + "_"
+        final_state = "qf" + str(count) #qf1, qf2, ...
+        count += 1
 
     f_out = open(out_fname, "w")
     f_out.write(final_state + "\n")
