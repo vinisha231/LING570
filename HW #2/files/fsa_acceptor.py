@@ -1,6 +1,5 @@
 #!/usr/bin/env python3 
 #python3 fsa_acceptor.py <fsa_filename> <input_filename> <output_filename>
-
 import re
 import sys
 
