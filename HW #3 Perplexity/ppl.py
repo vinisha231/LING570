@@ -45,8 +45,9 @@ def score(p1, p2, p3, l1, l2, l3, test_path, out_path):
                 history=" ".join(tokens[max(0, i - 2):i]) #1 token at i==1, else 2
 
                 if (w,) not in p1: #if its an unknown word: skip + count
-                    sent_oov += 1
-                    out.write(f"{i}: lg P({w} | {history})=-inf (unknown word)\n")
+                    sent_oov += 1 
+                    # the unknown-word line
+                    out.write(f"{i}: lg P({w} | {history}) = -inf (unknown word)\n")
                     continue
 
                 #interpolate; a missing bigram/trigram counts as 0
@@ -61,7 +62,9 @@ def score(p1, p2, p3, l1, l2, l3, test_path, out_path):
                 lg=math.log10(prob)
                 sent_lg += lg
                 suffix="" if seen else " (unseen ngrams)"
-                out.write(f"{i}: lg P({w} | {history})={lg:.10f}{suffix}\n")
+    
+                # the normal line
+                out.write(f"{i}: lg P({w} | {history}) = {lg:.10f}{suffix}\n")
 
             #per-sentence summary
             sent_words=len(words) #includes OOVs, excludes <s> </s>
