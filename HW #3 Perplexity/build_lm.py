@@ -15,14 +15,14 @@ def main(count_path, lm_path):
     #compute the unigram total once (not inside the loop)
     total_unigrams = sum(counts[1].values())
     with open(lm_path, "w") as out:
-        out.write("\\data\\\n\n")
+        out.write("\\data\\\n")
         for n in (1, 2, 3):
             types = len(counts[n])
             tokens = sum(counts[n].values())
-            out.write(f"ngram {n}: type = {types} tokens = {tokens}\n\n")
+            out.write(f"ngram {n}: type={types} token={tokens}\n")
 
         #unigram
-        out.write("\\1-grams:\n")
+        out.write("\n\\1-grams:\n")
         for ngram, count in sorted(counts[1].items(), key=lambda x: (-x[1], x[0])):
             prob = count / total_unigrams
             log_prob = math.log10(prob)
@@ -41,6 +41,7 @@ def main(count_path, lm_path):
             prob = count / counts[2][(ngram[0], ngram[1])]
             log_prob = math.log10(prob)
             out.write(f"{count} {prob:.10f} {log_prob:.10f} {' '.join(ngram)}\n")
+        out.write("\n\\end\\\n")
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])

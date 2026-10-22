@@ -15,7 +15,7 @@ def main(train_path, out_path):
     with open(out_path, "w") as out:
         for n in (1, 2, 3):
             for ngram, count in sorted(counts[n].items(), key=lambda x: (-x[1], x[0])):
-                out.write(f"{count} {' '.join(ngram)}\n")
+                out.write(f"{count}\t{' '.join(ngram)}\n")
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])
