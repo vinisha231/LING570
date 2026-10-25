@@ -25,13 +25,13 @@ def main(train_file, out_file):
         tot = sum(trans[frm].values())
         for to in sorted(trans[frm]):
             p = trans[frm][to] / tot
-            trans_lines.append(f"{frm} {to} {p:.6f} {math.log10(p):.6f}")
+            trans_lines.append(f"{frm} {to} {p!r} {math.log10(p):.6f}")
             states.update([frm, to])
     for st in sorted(emit):
         tot = sum(emit[st].values())
         for w in sorted(emit[st]):
             p = emit[st][w] / tot
-            emit_lines.append(f"{st} {w} {p:.6f} {math.log10(p):.6f}")
+            emit_lines.append(f"{st} {w} {p!r} {math.log10(p):.6f}")
             syms.add(w)
 
     with open(out_file, "w") as out:
